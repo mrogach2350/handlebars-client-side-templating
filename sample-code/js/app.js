@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   // select a template script, and pull out the handlebars and html inside it
   var source = $('#developer-li-template').html();
-  console.log('template script source:', source);
+  // console.log('template script source:', source);
 
   // compile the handlebars template
   var template = Handlebars.compile(source);
@@ -14,9 +14,18 @@ $(document).ready(function(){
     // each key is a variable the html template expects
     // each key's value is the data we want that variable to have
   var developerHtml = template({ developers: data.developers });
-  console.log('generated html string:', developerHtml);
+  // console.log('generated html string:', developerHtml);
 
   // append html to the view
   $("#developers-list").append(developerHtml);
+
+  var headerSource = $('#header-template').html();
+  var headerTemplate = Handlebars.compile(headerSource);
+  var headerHtml = headerTemplate({cohort: data.cohort,
+    room: data.room,
+    url: data.github_schedule
+  });
+  console.log(headerHtml);
+  $('header').append(headerHtml);
 
 });
